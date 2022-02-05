@@ -36,25 +36,18 @@
 </template>
 
 <script setup>
-import { onMounted, computed, reactive, ref } from 'vue'
+import { onMounted, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const data = computed(() => store.getters.getformPageForm)
 const fields = computed(() => Object.keys(data.value))
 const items = computed(() => store.getters.getformPageItems)
-let reactiveObj = null
+const reactiveObj = reactive({})
 
 onMounted(async () => {
 	await store.dispatch('setformPageForm')
 	store.dispatch('setfromPageItems')
-
-	const obj = {}
-	fields.value.forEach(elem => {
-		obj[elem] = ''
-	})
-
-	reactiveObj = reactive(obj)
 })
 </script>
 
