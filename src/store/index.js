@@ -6,7 +6,8 @@ export default createStore({
 		aboutPage: '',
 		mainPage: {},
 		formPageForm: {},
-		formPageItems: {}
+		formPageItems: {},
+		widgetData: {}
 	},
 	mutations: {
 		async setAboutPage(state) {
@@ -30,6 +31,12 @@ export default createStore({
 		async setfromPageItems(state) {
 			const resp = await axios.get('https://demo-api.vsdev.space/api/farm/baby')
 			state.formPageItems = resp.data
+		},
+		async setWidget(state) {
+			const resp = await axios.get(
+				'https://demo-api.vsdev.space/api/farm/left_widget'
+			)
+			state.widgetData = resp.data
 		}
 	},
 	actions: {
@@ -44,6 +51,9 @@ export default createStore({
 		},
 		setfromPageItems(context) {
 			context.commit('setfromPageItems')
+		},
+		setWidget(context) {
+			context.commit('setWidget')
 		}
 	},
 	getters: {
@@ -58,6 +68,9 @@ export default createStore({
 		},
 		getformPageItems(state) {
 			return state.formPageItems
+		},
+		getWidget(state) {
+			return state.widgetData
 		}
 	}
 })

@@ -1,6 +1,9 @@
 <template>
+	<a-button type="primary" @click="openForm" class="button">
+		Открыть форму
+	</a-button>
 	<div>
-		<a-form class="form">
+		<a-form class="form" v-if="isOpen">
 			<a-form-item
 				v-for="(field, index) in fields"
 				:label="data[field].title"
@@ -17,9 +20,7 @@
 				</a-select>
 				<a-input v-else type="string" v-model:value="reactiveObj[field]" />
 			</a-form-item>
-			<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-				<a-button type="primary" @click="submit">Создать</a-button>
-			</a-form-item>
+			<a-button type="primary" @click="submit" class="button">Создать</a-button>
 		</a-form>
 
 		<a-row :gutter="[16, 16]" class="items">
@@ -37,7 +38,7 @@
 
 <script setup>
 import axios from 'axios'
-import { onMounted, computed, reactive } from 'vue'
+import { onMounted, computed, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -45,6 +46,11 @@ const data = computed(() => store.getters.getformPageForm)
 const fields = computed(() => Object.keys(data.value))
 const items = computed(() => store.getters.getformPageItems)
 const reactiveObj = reactive({})
+const isOpen = ref(false)
+
+const openForm = () => {
+	isOpen.value = !isOpen.value
+}
 
 const submit = () => {
 	axios.post('https://demo-api.vsdev.space/api/farm/baby', reactiveObj)
@@ -63,5 +69,9 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .form {
 	width: 600px;
+}
+
+.button {
+	margin-bottom: 30px;
 }
 </style>

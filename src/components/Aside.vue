@@ -15,6 +15,9 @@
 			<a-menu-item key="/form">
 				<router-link to="/form">Форма</router-link>
 			</a-menu-item>
+			<a-menu-item :style="{ height: '500px' }">
+				<Widget></Widget>
+			</a-menu-item>
 		</a-menu>
 	</a-layout-sider>
 </template>
@@ -22,6 +25,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import Widget from './Widget.vue'
 
 const route = useRoute()
 const array = ref(['/'])
