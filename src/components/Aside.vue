@@ -12,8 +12,8 @@
 			<a-menu-item key="/aboutus">
 				<router-link to="/aboutus">О нас</router-link>
 			</a-menu-item>
-			<a-menu-item key="/idk">
-				<router-link to="/idk">IDK</router-link>
+			<a-menu-item key="/form">
+				<router-link to="/form">Форма</router-link>
 			</a-menu-item>
 		</a-menu>
 	</a-layout-sider>

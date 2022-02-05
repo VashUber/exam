@@ -4,7 +4,9 @@ import { createStore } from 'vuex'
 export default createStore({
 	state: {
 		aboutPage: '',
-		mainPage: {}
+		mainPage: {},
+		formPageForm: {},
+		formPageItems: {}
 	},
 	mutations: {
 		async setAboutPage(state) {
@@ -18,6 +20,16 @@ export default createStore({
 				'https://demo-api.vsdev.space/api/farm/home_page'
 			)
 			state.mainPage = resp.data
+		},
+		async setformPageForm(state) {
+			const resp = await axios.get(
+				'https://demo-api.vsdev.space/api/farm/baby/form'
+			)
+			state.formPageForm = resp.data.fields
+		},
+		async setfromPageItems(state) {
+			const resp = await axios.get('https://demo-api.vsdev.space/api/farm/baby')
+			state.formPageItems = resp.data
 		}
 	},
 	actions: {
@@ -26,6 +38,12 @@ export default createStore({
 		},
 		setMainPage(context) {
 			context.commit('setMainPage')
+		},
+		setformPageForm(context) {
+			context.commit('setformPageForm')
+		},
+		setfromPageItems(context) {
+			context.commit('setfromPageItems')
 		}
 	},
 	getters: {
@@ -34,6 +52,12 @@ export default createStore({
 		},
 		getMainPageInfo(state) {
 			return state.mainPage
+		},
+		getformPageForm(state) {
+			return state.formPageForm
+		},
+		getformPageItems(state) {
+			return state.formPageItems
 		}
 	}
 })
