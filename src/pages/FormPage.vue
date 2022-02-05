@@ -18,7 +18,7 @@
 				<a-input v-else type="string" v-model:value="reactiveObj[field]" />
 			</a-form-item>
 			<a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-				<a-button type="primary">Создать</a-button>
+				<a-button type="primary" @click="submit">Создать</a-button>
 			</a-form-item>
 		</a-form>
 
@@ -36,6 +36,7 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { onMounted, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
 
@@ -44,6 +45,14 @@ const data = computed(() => store.getters.getformPageForm)
 const fields = computed(() => Object.keys(data.value))
 const items = computed(() => store.getters.getformPageItems)
 const reactiveObj = reactive({})
+
+const submit = () => {
+	axios.post('https://demo-api.vsdev.space/api/farm/baby', reactiveObj)
+	store.dispatch('setfromPageItems')
+	fields.value.forEach(elem => {
+		reactiveObj[elem] = ''
+	})
+}
 
 onMounted(async () => {
 	await store.dispatch('setformPageForm')
