@@ -7,10 +7,10 @@
 			:style="{ lineHeight: '64px' }"
 		>
 			<a-menu-item key="/">
-				<router-link to="/">О нас</router-link>
+				<router-link to="/">Главная</router-link>
 			</a-menu-item>
-			<a-menu-item key="/store">
-				<router-link to="/store">Store</router-link>
+			<a-menu-item key="/aboutus">
+				<router-link to="/aboutus">О нас</router-link>
 			</a-menu-item>
 			<a-menu-item key="/idk">
 				<router-link to="/idk">IDK</router-link>
